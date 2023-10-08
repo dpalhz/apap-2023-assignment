@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <object th:include="~{fragments/common :: js}" th:remove="tag"></object>
+  <object th:include="~{fragments/common :: css}" th:remove="tag"></object>
+  
+
+  <title>Tambah Barang</title>
+
+ 
+</head>
+<body>
+    <nav th:replace="~{fragments/navbar :: navbar('barang')}"></nav>
+  <div class="container mt-4">
+    <div class="card">
+      <div class="card-header d-flex justify-content-center">
+        <h2 class="card-title">Tambah Barang</h2>
+        <br>
+      </div>
+
+
+      <div class="card-body m-4">
+        <form th:action="@{/barang/tambah}" th:object="${barangDTO}" method="POST">
+
+            <div class="form-group m-3">
+                Merk Barang: <br>
+                <input class="form-control" type="text" th:field="*{merk}" />
+            </div>
+           
+            <div class="form-group m-3">
+                <label for="tipeBarang">Tipe Barang:</label>
+                <select class="form-control" id="tipeBarang" th:field="*{tipeBarang}">
+                  <option th:value="1">Produk Elektronik</option>
+                  <option th:value="2">Pakaian & Aksesoris</option>
+                  <option th:value="3">Makanan & Minuman</option>
+                  <option th:value="4">Kosmetik</option>
+                  <option th:value="5">Perlengkapan Rumah</option>
+                </select>
+              </div>
+
+            <div class="form-group m-3">
+                Harga: <br>
+                <input required class="form-control" type="number" th:field="*{hargaBarang}" />
+                <br><br>
+            </div>
+            <div class="card-footer d-flex justify-content-center">
+                <a href="/" class="btn btn-danger m-3">Batal</a>
+                <button class="btn btn-primary m-3" type="submit">Simpan</button>
+              </div>
+
+
+        </form>
+      </div>
+     
+    </div>
+  </div>
+
+
+</body>
+</html>

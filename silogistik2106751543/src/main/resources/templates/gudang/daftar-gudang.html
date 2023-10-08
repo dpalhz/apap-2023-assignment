@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:include="~{fragments/common :: js}" th:remove="tag">
+    <link th:include="~{fragments/common :: css}" th:remove="tag">
+    <title>Daftar Gudang</title>
+</head>
+<body>
+    <nav th:replace="~{fragments/navbar :: navbar('gudang')}"></nav>
+    <div class="container">
+        <div class="text-center pt-5">
+            <h2>Daftar Gudang</h2>
+        </div>
+        <table class="table m-4" id="tableGudang">
+            <thead class="thead-dark">
+                <tr>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>Alamat Gudang</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="gudang, iterationStatus: ${listGudang}" th:style="${iterationStatus.even} ? 'font-weight:bold;'">
+                    <td th:text="${iterationStatus.count}"></td>
+                    <td>
+                        <h5 th:text="${gudang.namaGudang}" class="card-title"></h5>
+                    </td>
+                    <td>
+                        <h6 th:text="${gudang.alamatGudang}"></h6>
+                    </td>
+                    <td>
+                        <a type="button" class="btn btn-md btn-secondary" th:href="@{/gudang/{id}(id=${gudang.idGudang})}">Detail</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $('#tableGudang').DataTable({
+                "lengthMenu": [ 5, 10 ],
+                "columnDefs": [
+                    { targets: [3], "orderable": false  }, // Sesuaikan dengan jumlah kolom Anda
+                ]
+            });
+        });
+    </script>
+</body>
+</html>

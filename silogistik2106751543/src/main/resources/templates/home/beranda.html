@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <object th:include="~{fragments/common :: js}" th:remove="tag"></object>
+    <object th:include="~{fragments/common :: css}" th:remove="tag"></object>
+    <title>Beranda</title>
+</head>
+<body>
+
+    <div th:replace="fragments/navbar.html :: navbar(currentPage='beranda')"></div>
+
+
+    <div class="container-fluid">
+        <div class="d-flex justify-content-center align-items-center mt-5" style="min-height: 20vh;">
+            <img th:src="@{images/logo.png}" alt="Silogistik" class="img-fluid" style="width: 25%; height: 25%;">
+        </div>
+    </div>
+
+     <div class="container d-flex justify-content-center align-items-center mt-4" style="min-height: 20vh;">
+        <div class="row">
+            <div class="col-md-3 mb-4">
+                <div class="card text-white text-center" style="background-color: rgba(0, 0, 255, 1);">
+                    <div class="card-body">
+                        <h5 class="card-title">Card 1</h5>
+                        <h2>{Jumlah}</h2>
+                        <p class="card-text">Subjudul</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="card text-white text-center" style="background-color: rgba(0, 0, 255, 0.8);">
+                    <div class="card-body">
+                        <h5 class="card-title">Card 2</h5>
+                        <h2>{Jumlah}</h2>
+                        <p class="card-text">Subjudul</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="card text-white text-center" style="background-color: rgba(0, 0, 255, 0.6);">
+                    <div class="card-body">
+                        <h5 class="card-title">Card 3</h5>
+                        <h2>{Jumlah}</h2>
+                        <p class="card-text">Subjudul</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="card text-white text-center" style="background-color: rgba(0, 0, 255, 0.4);">
+                    <div class="card-body">
+                        <h5 class="card-title">Card 4</h5>
+                        <h2>{Jumlah}</h2>
+                        <p class="card-text">Subjudul</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+</body>
+</html>

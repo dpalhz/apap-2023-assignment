@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
+
+<head>
+  <object th:include="~{fragments/common :: js}" th:remove="tag"></object>
+  <object th:include="~{fragments/common :: css}" th:remove="tag"></object>
+</head>
+
+      
+  <nav th:fragment="navbar(currentPage)" class="navbar navbar-expand-lg navbar-dark bg-primary" style="min-height: 10vh;">
+      <div class="container-fluid">
+          <a class="navbar-brand" href="/">Silogistik</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                          data-bs-toggle="dropdown" aria-expanded="false">
+                          Gudang
+                      </a>
+                      <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <li><a class="dropdown-item" href="/gudang">Daftar Gudang</a></li>
+                          <li><a class="dropdown-item" href="#">Cari Barang</a></li>
+                          <!-- <li><hr class="dropdown-divider"></li>
+                          <li><a class="dropdown-item" href="#">Something else here</a></li> -->
+                      </ul>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link active" aria-current="page" href="/barang">Barang</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#">Permintaan Pengiriman</a>
+                  </li>
+
+                  <li class="nav-item">
+                      <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Bonus</a>
+                  </li>
+              </ul>
+
+          </div>
+      </div>
+  </nav>
+
+</html>
