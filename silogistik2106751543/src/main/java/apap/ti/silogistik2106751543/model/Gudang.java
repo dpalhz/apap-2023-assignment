@@ -35,7 +35,7 @@ public class Gudang {
 
 
     @OneToMany(mappedBy = "gudang", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    private List<GudangBarang> gudangBarang;
+    private List<GudangBarang> listGudangBarang;
 
  
 

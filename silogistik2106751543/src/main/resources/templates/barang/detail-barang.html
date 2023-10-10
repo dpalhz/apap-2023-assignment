@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <object th:include="~{fragments/common :: js}" th:remove="tag"></object>
+  <object th:include="~{fragments/common :: css}" th:remove="tag"></object>
+  
+
+  <title>Detail Barang</title>
+
+ 
+</head>
+<body>
+    <nav th:replace="~{fragments/navbar :: navbar('barang')}"></nav>
+  <div class="container mt-4">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between">
+        <h2 class="card-title">Detail Gudang</h2>
+        
+        <a th:href="@{/barang/{id}/ubah(id=${barangDetailDTO.sku})}" class="btn btn-success">Edit Barang</a>
+
+      </div>
+      <div class="card-body m-4">
+        <div class="d-flex w-50">
+          <div class="col"><p class="card-title mr-2">Merk</p></div>
+          <div class="col"><p class="card-title" th:text="': ' + ${barangDetailDTO.merk}"><p></div>
+        </div>
+        <div class="d-flex w-50">
+          <div class="col"><p class="card-title mr-2">SKU</p></div>
+          <div class="col"><p class="card-title" th:text="': '+ ${barangDetailDTO.sku}"></p></div>
+        </div>
+        <div class="d-flex w-50">
+          <div class="col"><p class="card-title mr-2">Tipe Barang</p></div>
+          <div class="col"><p class="card-title" th:text="': '+ ${barangDetailDTO.tipeBarang}"></p></div>
+        </div>
+        <div class="d-flex w-50">
+          <div class="col"><p class="card-title mr-2">Total Stok</p></div>
+          <div class="col"><p class="card-title" th:text="': '+ ${barangDetailDTO.totalStok}"></p></div>
+        </div>
+        <div class="d-flex w-50">
+          <div class="col"><p class="card-title mr-2">Harga</p></div>
+          <div class="col"><p class="card-title" th:text="': '+ ${barangDetailDTO.hargaBarang}"></p></div>
+        </div>
+
+          <br>
+          
+
+        <h4 class="mt-4 font-weight-bold">Daftar Gudang Tersedia</h4>
+        <table class="table" th:if="${barangDetailDTO.gudangWithStok != null and barangDetailDTO.gudangWithStok.size() > 0}">
+
+        <!-- <table class="table"> -->
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nama Gudang</th>
+                <th scope="col">Alamat Gudang</th>
+                <th scope="col">Stok</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="gudangWithStok, iterationStatus: ${bukuDetailDTO.gudangWithStok}">
+                  <td th:text="${iterationStatus.count}"></td>
+                  <td>
+                      <h5 th:text="${gudangWithStok.gudang.namaGudang}" class="card-title"></h5>
+                  </td>
+                  <td>
+                      <h6 th:text="${gudangWithStok.gudang.alamatGudang}"></h6>
+                  </td>
+                  <td>
+                    <h6 th:text="${gudangWithStok.stokSuatuBarang}"></h6>
+                </td>
+                 
+              </tr>
+          </tbody>
+          </table>
+
+
+          <p th:unless="${barangDetailDTO.gudangWithStok != null and barangDetailDTO.gudangWithStok.size() > 0}">Barang tidak tersedia di gudang manapun</p>
+
+          
+
+          
+
+      </div>
+      <div class="card-footer d-flex justify-content-center">
+        <a href="/barang" class="btn btn-secondary">Kembali</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

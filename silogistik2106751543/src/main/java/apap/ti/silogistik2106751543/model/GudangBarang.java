@@ -26,7 +26,7 @@ public class GudangBarang {
 
     // Menambahkan relasi many-to-one ke Gudang
     @ManyToOne
-    @JoinColumn(name = "id_gudang", referencedColumnName= "id", nullable = false)
+    @JoinColumn(name = "id_gudang", referencedColumnName= "id", nullable = true)
     private Gudang gudang;
 
     // Menambahkan relasi many-to-one ke Barang

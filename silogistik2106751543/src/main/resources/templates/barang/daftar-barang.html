@@ -24,40 +24,39 @@
       </div>
     
 
-
       <table class="table">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Merk</th>
-            <th scope="col">Stok</th>
-            <th scope="col">Harga</th>
-            <th scope="col">Action</th>
-          </tr>
+        <thead class="bg-dark text-white text-center">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">SKU</th>
+                <th scope="col">Merk</th>
+                <th scope="col">Stok</th>
+                <th scope="col">Harga</th>
+                <th scope="col">Action</th>
+            </tr>
         </thead>
         <tbody>
-            <tr th:each="gudang, iterationStatus: ${listGudang}" th:style="${iterationStatus.even} ? 'font-weight:bold;'">
+            <tr th:each="barang, iterationStatus: ${listBarang}" th:style="${iterationStatus.even} ? 'font-weight:bold;'" class="text-center">
                 <td th:text="${iterationStatus.count}"></td>
+                <td>
+                    <h5 th:text="${barang.sku}" class="card-title"></h5>
+                </td>
                 <td>
                     <h5 th:text="${barang.merk}" class="card-title"></h5>
                 </td>
-                <td>
-                    <h6 th:text="${gudang.alamatGudang}"></h6>
+                <td class="align-middle">
+                    <h6 th:text="${barang.totalStok}"></h6>
                 </td>
                 <td>
-                    <a type="button" class="btn btn-md btn-secondary" th:href="@{/gudang/{id}(id=${gudang.idGudang})}">Detail</a>
+                    <h6 th:text="'Rp'+${barang.hargaBarang}"></h6>
+                </td>
+                <td>
+                    <a type="button" class="btn btn-md btn-secondary" th:href="@{/barang/{id}(id=${barang.sku})}">Detail</a>
                 </td>
             </tr>
         </tbody>
-      </table>
-      
+    </table>
     
-
-
-
-
-
-      
     </div>
   </div>
 

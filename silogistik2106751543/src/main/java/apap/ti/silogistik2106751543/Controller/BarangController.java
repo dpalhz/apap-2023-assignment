@@ -11,13 +11,17 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import apap.ti.silogistik2106751543.dto.BarangMapper;
 import apap.ti.silogistik2106751543.dto.request.CreateBarangRequestDTO;
+import apap.ti.silogistik2106751543.dto.request.UpdateBarangRequestDTO;
+import apap.ti.silogistik2106751543.dto.resoonse.BarangWithTotalStokDTO;
 import apap.ti.silogistik2106751543.model.Barang;
 import apap.ti.silogistik2106751543.model.GudangBarang;
 import apap.ti.silogistik2106751543.service.BarangService;
+import apap.ti.silogistik2106751543.service.GudangBarangService;
 import jakarta.validation.Valid;
 
 @Controller
@@ -31,11 +35,15 @@ public class BarangController {
     BarangMapper barangMapper;
 
 
+    @Autowired
+    GudangBarangService gudangBarangService;
+
+
     @GetMapping("/barang")
     public String viewDaftarGudang(Model model){
-        List<Barang> listBarang = barangService.getAllBarang();
+        List<BarangWithTotalStokDTO> listBarang = barangService.getListBarangWithTotalStok();
 
-        //Add variabel semua bukuModel ke "ListBuku" untuk dirender pada thymeleaf
+       
         model.addAttribute("listBarang", listBarang);
 
         return "barang/daftar-barang.html";
@@ -76,16 +84,47 @@ public class BarangController {
         var barang = barangMapper.createBarangRequestDTOToBarang(barangDTO);
 
         // inisiasi list gudangBarang
-        GudangBarang listGB = new GudangBarang();
-        System.out.println(listGB.getIdGudangBarang());
-
+        
         barangService.savaBarang(barang);
         
         //Add variabel id barang ke 'id' untuk dirender di thymeleaf
         model.addAttribute("merk", barang.getMerk());
 
-      
         return "barang/sukses-tambah-barang.html";
     }
+
+
+    @GetMapping("barang/{id}")
+    public String detailBarang(@PathVariable("id") String sku, Model model) {
+        //Mendapatkan buku melalui kodeBuku
+        var barangDetailDTO = barangService.getBarangDetailDTO(sku);
+        model.addAttribute("barangDetailDTO", barangDetailDTO);
+        return "barang/detail-barang.html";
+    }
+
+
+    @GetMapping("/barang/{id}/ubah")
+    public String formUpdateBarang(@PathVariable("id") String id, Model model){
+        var barang = barangService.getBarangById(id);
+        var barangDTO = barangMapper.barangToUpdateBarangRequestDTO(barang);
+        System.out.println(barangDTO.getSku());
+        barangDTO.setSku(barang.getSku());
+        model.addAttribute("barangDTO", barangDTO);
+        return "barang/edit-barang.html";
+    }
+
+    @PostMapping("/barang/{id}/ubah")
+    public String UpdateBarang(@PathVariable("id") String id, UpdateBarangRequestDTO updateBarangRequestDTO, Model model){
+        var barang = barangService.getBarangById(id);
+
+
+        var barangDTO = barangMapper.updateBarangRequestDTOToBarang(updateBarangRequestDTO);
+        barangDTO.setSku(barang.getSku());
+        Barang barangEdited  =  barangService.UpdateBarang(barangDTO);
+        
+        model.addAttribute("barangEdited", barangEdited);
+        return "barang/sukses-edit-barang.html";
+    }
+
     
 }

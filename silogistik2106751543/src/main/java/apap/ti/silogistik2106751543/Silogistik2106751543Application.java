@@ -26,32 +26,32 @@ public class Silogistik2106751543Application {
 
 
 	// CommandLineRunner digunakan untuk execute code saat spring pertama kali start up
-	@Bean
-	@Transactional
-	CommandLineRunner run(GudangService gudangService, GudangMapper gudangMapper){
-		return args -> {
-			var faker = new Faker(new Locale("in-ID"));
+	// @Bean
+	// @Transactional
+	// CommandLineRunner run(GudangService gudangService, GudangMapper gudangMapper){
+	// 	return args -> {
+	// 		var faker = new Faker(new Locale("in-ID"));
 
 		
-        for (int i = 0; i < 10; i++) {
-            String namaGudang = faker.company().name();
-            String alamatGudang = faker.address().streetAddress();
+    //     for (int i = 0; i < 10; i++) {
+    //         String namaGudang = faker.company().name();
+    //         String alamatGudang = faker.address().streetAddress();
 
-            CreateGudangRequestDTO gudangRequestDTO = new CreateGudangRequestDTO();
-            gudangRequestDTO.setNamaGudang(namaGudang);
-            gudangRequestDTO.setAlamatGudang(alamatGudang);
+    //         CreateGudangRequestDTO gudangRequestDTO = new CreateGudangRequestDTO();
+    //         gudangRequestDTO.setNamaGudang(namaGudang);
+    //         gudangRequestDTO.setAlamatGudang(alamatGudang);
 
-            // Anda bisa menambahkan atribut lain sesuai kebutuhan
+    //         // Anda bisa menambahkan atribut lain sesuai kebutuhan
 
-            // Panggil service untuk membuat gudang
-			var gudang = gudangMapper.createGudangRequestDTOToGudang(gudangRequestDTO);
-            gudangService.saveGudang(gudang);
+    //         // Panggil service untuk membuat gudang
+	// 		var gudang = gudangMapper.createGudangRequestDTOToGudang(gudangRequestDTO);
+    //         gudangService.saveGudang(gudang);
 
-            // Tambahkan gudang ke daftar gudang jika diperlukan
-            // misalnya: gudangService.addGudangToDaftarGudang(gudang);
-        }
-    };
-	}
+    //         // Tambahkan gudang ke daftar gudang jika diperlukan
+    //         // misalnya: gudangService.addGudangToDaftarGudang(gudang);
+    //     }
+    // };
+	// }
 }
 
 

@@ -38,7 +38,7 @@ public class Barang {
 
 
     @OneToMany(mappedBy = "barang", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    private List<GudangBarang> gudangBarang;
+    private List<GudangBarang> listGudangBarang;
 
 
      // Relasi dengan PermintaanPengirimanBarang jika diperlukan
