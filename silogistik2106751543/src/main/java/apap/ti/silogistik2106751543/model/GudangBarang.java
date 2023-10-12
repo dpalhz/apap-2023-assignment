@@ -30,7 +30,7 @@ public class GudangBarang {
     private Gudang gudang;
 
     // Menambahkan relasi many-to-one ke Barang
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "sku_barang", referencedColumnName = "sku", nullable = false)
     private Barang barang;
 

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8" />
+  <object th:include="fragments/common :: js" th:remove="tag"></object>
+  <object th:include="fragments/common :: css" th:remove="tag"></object>
+  <title>Form Restok Barang</title>
+</head>
+
+<body>
+  <nav th:replace="fragments/navbar :: navbar('permintaan-pengiriman')"></nav>
+  <div class="container">
+    <div class="card m-4 p-4">
+        <div class="card-header d-flex justify-content-center">
+            <h2 class="card-title">Filter Permintaan Pengiriman</h2>
+          </div>
+
+
+      <div class="card-body mt-4">
+
+        <form th:action="@{'/filter-permintaan-pengiriman'}" method="get">
+            <div class="row">
+              <div class="col form-group">
+                <select class="form-control" name="sku">
+                  <option th:each="barangExisting : ${listBarang}" th:value="${barangExisting.sku}" th:text="${barangExisting.merk}"></option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col form-group">
+                <label class="control-label" for="startDate">Start Date</label>
+                <input class="form-control" type="date" name="start-date" placeholder="dd/mm/yyyy" />
+              </div>
+              <div class="col form-group">
+                <label class="control-label" for="endDate">End Date</label>
+                <input class="form-control" type="date" name="end-date" placeholder="dd/mm/yyyy" />
+              </div>
+            </div>
+
+            <div class="row mt-3">
+              <div class="d-flex justify-content-end">
+                <button class="btn btn-primary w-20" type="submit" style="text-align: right;">Cari</button>
+              </div>
+            </div>
+
+           
+          </form>
+    
+            <br>
+            <table class="table m-3 text-center" th:if="${permintaanPengirimanDTO != null}">
+              <thead class="bg-dark text-white">
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Waktu Permintaan</th>
+                  <th scope="col">Nomor Pengiriman</th>
+                  <th scope="col">Nama Penerima</th>
+                  <th scope="col">Alamat Penerima</th>
+                  <th scope="col">Tanggal Pengiriman</th>
+
+                 
+                </tr>
+              </thead>
+              <tbody th:if="${permintaanPengirimanDTO != null}">
+
+                <tr th:each="req, iterationStatus : ${permintaanPengirimanDTO}">
+
+                    <td th:text="${iterationStatus.count}"></td>
+                    <td th:text="${req.waktuPermintaan}"></td>
+                    <td>
+                        <a th:href="@{'/detail-permintaan/' + ${req.idPermintaanPengiriman}}" style="text-decoration: none;">
+                            <span th:text="${req.nomorPengiriman}"></span>
+                        </a>
+                    </td>
+                    
+                    <td th:text="${req.namaPenerima}"></td>
+                    <td th:text="${req.alamatPenerima}"></td>
+                    <td th:text="${req.tanggalPengiriman}"></td>
+                    
+                </tr>
+
+              
+              </tbody>
+            </table>
+            <br><br>
+       
+        
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

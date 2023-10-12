@@ -45,7 +45,7 @@ public class GudangServiceImpl implements GudangService{
     @Override
     public Integer getBanyakGudang() {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getBanyakGudang'");
+        return gudangDb.findAll().size();
     }
 
     @Override
@@ -64,33 +64,29 @@ public class GudangServiceImpl implements GudangService{
     public void restokBarang(Gudang gudangFromDTO) {
         // TODO Auto-generated method stub
         Gudang gudang = getGudangById(gudangFromDTO.getIdGudang());
-        System.out.println("ADDDDAAAA1");
 
         for (GudangBarang gudangBarang : gudangFromDTO.getListGudangBarang()) {
+            System.out.println(gudangBarang.getBarang());
             if(gudangBarang.getBarang()!=null){
-                System.out.println(gudangBarang.getBarang().getSku());
-                Barang barang = barangService.getBarangById(gudangBarang.getBarang().getSku());
-                 List<GudangBarang> listGudangBarangByBarang = gudangBarangService.getGudangBarangByBarang(barang);
-                 if(listGudangBarangByBarang!=null){System.out.println("ADDDDAAAA");}
-                
-                 for (GudangBarang gudangBarang2 : listGudangBarangByBarang) {
-                    if(gudangBarang2.getGudang()==null){
-                        gudangBarang2.setGudang(gudang);
-                        gudangBarang2.setStok(gudangBarang.getStok());
-                        gudangBarangService.save(gudangBarang2);
-
-                    }else if(gudangBarang2.getGudang().equals(gudang)){
-                        gudangBarang2.setStok(gudangBarang2.getStok()+gudangBarang.getStok());
-                    }else{
-                        saveToGudangBarang(gudangBarang.getBarang(), gudang, gudangBarang.getStok());
-                    }
-                 }
+                if(gudangBarang.getStok()==null){
+                    gudangBarang.setStok(0);
+                }
+                 GudangBarang gudangBarangPointer = gudangBarangService.getGudangBarangByGudangAndBarang(gudang, gudangBarang.getBarang());
+                if (gudangBarangPointer!=null){
+                    gudangBarangPointer.setStok(gudangBarangPointer.getStok()+gudangBarang.getStok());
+                    gudangBarangService.save(gudangBarangPointer);
+                }else{
+                    saveToGudangBarang(gudangBarang.getBarang(), gudang, gudangBarang.getStok());
+                }
             }
-           
         }
+
         gudangDb.save(gudang);
         
+        
     }
+
+
 
     public void saveToGudangBarang(Barang barang, Gudang gudang, Integer stok ){
         var gudangBarangDTO = new CreateGudangBarangRequestDTO();
@@ -99,12 +95,6 @@ public class GudangServiceImpl implements GudangService{
         gudangBarangDTO.setGudang(gudang);
         var gudangBarang = gudangBarangMapper.createRequestGudangBarangRequestDTOToGudangBarang(gudangBarangDTO);
         gudangBarangService.save(gudangBarang);
-        // set listGudangBarang di entity barang
-        Barang b = barangService.getBarangById(barang.getSku());
-        barang.getListGudangBarang().add(gudangBarang);
-        barangService.savaBarang(b);
-
-        
     }
 
     

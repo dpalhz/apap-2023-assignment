@@ -1,9 +1,6 @@
-package apap.ti.silogistik2106751543.Controller;
-
-import java.util.ArrayList;
+package apap.ti.silogistik2106751543.controller;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,13 +10,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import apap.ti.silogistik2106751543.dto.BarangMapper;
 import apap.ti.silogistik2106751543.dto.request.CreateBarangRequestDTO;
 import apap.ti.silogistik2106751543.dto.request.UpdateBarangRequestDTO;
 import apap.ti.silogistik2106751543.dto.resoonse.BarangWithTotalStokDTO;
 import apap.ti.silogistik2106751543.model.Barang;
-import apap.ti.silogistik2106751543.model.GudangBarang;
 import apap.ti.silogistik2106751543.service.BarangService;
 import apap.ti.silogistik2106751543.service.GudangBarangService;
 import jakarta.validation.Valid;
@@ -99,6 +94,8 @@ public class BarangController {
         //Mendapatkan buku melalui kodeBuku
         var barangDetailDTO = barangService.getBarangDetailDTO(sku);
         model.addAttribute("barangDetailDTO", barangDetailDTO);
+
+        model.addAttribute("gudangBarang", gudangBarangService.getGudangBarangByBarang(barangService.getBarangById(sku)));
         return "barang/detail-barang.html";
     }
 
@@ -125,6 +122,8 @@ public class BarangController {
         model.addAttribute("barangEdited", barangEdited);
         return "barang/sukses-edit-barang.html";
     }
+
+    
 
     
 }

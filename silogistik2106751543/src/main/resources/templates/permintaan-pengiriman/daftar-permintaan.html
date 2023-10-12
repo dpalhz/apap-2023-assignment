@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:include="~{fragments/common :: js}" th:remove="tag">
+    <link th:include="~{fragments/common :: css}" th:remove="tag">
+    <title>Daftar Permintaan Pengiriman</title>
+</head>
+<body>
+    <nav th:replace="~{fragments/navbar :: navbar('permintaan-pengiriman')}"></nav>
+    <div class="container">
+        <div class="text-center pt-5">
+            <h2>Daftar Permintaan Pengiriman</h2>
+        </div>
+
+       
+        <div class="d-flex justify-content-center m-4">
+            <a href="/permintaan-pengiriman/tambah" class="btn btn-primary w-20">+ Tambah Permintaan Pengiriman</a>
+          </div>
+    
+
+
+        <br>
+        <table class="table m-4" id="tableGudang">
+            <thead class="thead-dark">
+                <tr>
+                    <th>No</th>
+                    <th>Waktu Permintaan</th>
+                    <th>Nomor Pengiriman</th>
+                    <th>Nama Penerima</th>
+                    <th>Alamat Penerima</th>
+                    <th>Tanggal Pengiriman</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="req, iterationStatus: ${listPermintaanPengiriman}">
+                    <td class="font-weight-bold" th:text="${iterationStatus.count}"></td>
+                    <td>
+                        <p th:text="${req.waktuPermintaan}"></p>
+                    </td>
+                    <td>
+                        <p font-weight-bold th:text="${req.nomorPengiriman}"></p>
+                    </td>
+
+                    <td>
+                        <p font-weight-bold th:text="${req.namaPenerima}"></p>
+                    </td>
+
+                    <td>
+                        <p font-weight-bold th:text="${req.alamatPenerima}"></p>
+                    </td>
+
+                    
+                    <td>
+                        <p font-weight-bold th:text="${req.tanggalPengiriman}"></p>
+                    </td>
+
+
+                    <td>
+                        <a type="button" class="btn btn-md btn-secondary" th:href="@{/permintaan-pengiriman/{id}(id=${req.idPermintaanPengiriman})}">Detail</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $('#tableGudang').DataTable({
+                "lengthMenu": [ 5, 10 ],
+                "columnDefs": [
+                    { targets: [3], "orderable": false  }, // Sesuaikan dengan jumlah kolom Anda
+                ]
+            });
+        });
+    </script>
+</body>
+</html>

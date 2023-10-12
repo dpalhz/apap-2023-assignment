@@ -19,8 +19,5 @@ public class BarangDetailDTO {
     private Integer totalStok;
     private String tipeBarang;
 
-    private List<GudangWithStok> gudangWithStok;
-
-
     
 }

@@ -23,39 +23,42 @@
         <a href="/barang/tambah" class="btn btn-primary w-20">+ Tambah Barang</a>
       </div>
     
+      <div class="m-4">
+        <table class="table">
+          <thead class="bg-dark text-white text-center">
+              <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">SKU</th>
+                  <th scope="col">Merk</th>
+                  <th scope="col">Stok</th>
+                  <th scope="col">Harga</th>
+                  <th scope="col">Action</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr th:each="barang, iterationStatus: ${listBarang}" th:style="${iterationStatus.even} ? 'font-weight:bold;'" class="text-center">
+                  <td th:text="${iterationStatus.count}"></td>
+                  <td>
+                      <h6 th:text="${barang.sku}" class="card-title"></h6>
+                  </td>
+                  <td>
+                      <h6 th:text="${barang.merk}"></h6>
+                  </td>
+                  <td class="align-middle">
+                      <p th:text="${barang.totalStok}"></p>
+                  </td>
+                  <td>
+                      <p th:text="'Rp'+${barang.hargaBarang}"></p>
+                  </td>
+                  <td>
+                      <a type="button" class="btn btn-md btn-secondary" th:href="@{/barang/{id}(id=${barang.sku})}">Detail</a>
+                  </td>
+              </tr>
+          </tbody>
+      </table>
 
-      <table class="table">
-        <thead class="bg-dark text-white text-center">
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">SKU</th>
-                <th scope="col">Merk</th>
-                <th scope="col">Stok</th>
-                <th scope="col">Harga</th>
-                <th scope="col">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="barang, iterationStatus: ${listBarang}" th:style="${iterationStatus.even} ? 'font-weight:bold;'" class="text-center">
-                <td th:text="${iterationStatus.count}"></td>
-                <td>
-                    <h5 th:text="${barang.sku}" class="card-title"></h5>
-                </td>
-                <td>
-                    <h5 th:text="${barang.merk}" class="card-title"></h5>
-                </td>
-                <td class="align-middle">
-                    <h6 th:text="${barang.totalStok}"></h6>
-                </td>
-                <td>
-                    <h6 th:text="'Rp'+${barang.hargaBarang}"></h6>
-                </td>
-                <td>
-                    <a type="button" class="btn btn-md btn-secondary" th:href="@{/barang/{id}(id=${barang.sku})}">Detail</a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+      </div>
+     
     
     </div>
   </div>

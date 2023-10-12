@@ -8,7 +8,7 @@
     <title>Daftar Gudang</title>
 </head>
 <body>
-    <nav th:replace="~{fragments/navbar :: navbar('gudang')}"></nav>
+    <nav th:replace="~{fragments/navbar :: navbar(currentPage=gudang)}"></nav>
     <div class="container">
         <div class="text-center pt-5">
             <h2>Daftar Gudang</h2>
@@ -23,13 +23,13 @@
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="gudang, iterationStatus: ${listGudang}" th:style="${iterationStatus.even} ? 'font-weight:bold;'">
+                <tr th:each="gudang, iterationStatus: ${listGudang}" >
                     <td th:text="${iterationStatus.count}"></td>
                     <td>
-                        <h5 th:text="${gudang.namaGudang}" class="card-title"></h5>
+                        <h6 th:text="${gudang.namaGudang}" class="card-title"></h6>
                     </td>
                     <td>
-                        <h6 th:text="${gudang.alamatGudang}"></h6>
+                        <p th:text="${gudang.alamatGudang}"></p>
                     </td>
                     <td>
                         <a type="button" class="btn btn-md btn-secondary" th:href="@{/gudang/{id}(id=${gudang.idGudang})}">Detail</a>

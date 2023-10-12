@@ -23,11 +23,11 @@
       <div class="card-body m-4">
         <div class="d-flex w-50">
           <div class="col"><p class="card-title mr-2">Nama Gudang</p></div>
-          <div class="col"><p class="card-title" th:text="': ' + ${gudang.namaGudang}"><p></div>
+          <div class="col"><p th:text="': ' + ${gudang.namaGudang}"><p></div>
         </div>
         <div class="d-flex w-50">
           <div class="col"><p class="card-title mr-2">Alamat Gudang</p></div>
-          <div class="col"><p class="card-title" th:text="': '+ ${gudang.alamatGudang}"></p></div>
+          <div class="col"><p th:text="': '+ ${gudang.alamatGudang}"></p></div>
         </div>
 
           <br>
@@ -51,16 +51,16 @@
               <tr th:each="gudangBarang, iterationStatus: ${listGudangBarang}" th:style="${iterationStatus.even} ? 'font-weight:bold;'">
                 <td th:text="${iterationStatus.count}"></td>
                 <td>
-                  <h5 th:text="${gudangBarang.barang.sku}" class="card-title"></h5>
+                  <h5 class="card-title"><a th:href="@{/barang/{id}(id=${gudangBarang.barang.sku})}" th:text="${gudangBarang.barang.merk}" style="text-decoration: none;"></a></h5>
                 </td>
                 <td>
-                  <h5 th:text="${gudangBarang.barang.merk}" class="card-title"></h5>
+                  <h5 th:text="${gudangBarang.barang.merk}"></h5>
                 </td>
                 <td>
-                  <h5 th:text="${gudangBarang.stok}" class="card-title"></h5>
+                  <h5 th:text="${gudangBarang.stok}"></h5>
                 </td>
                 <td>
-                  <h5 th:text="${gudangBarang.barang.hargaBarang}" class="card-title"></h5>
+                  <h5 th:text="${gudangBarang.barang.hargaBarang}"></h5>
                 </td>
               
                

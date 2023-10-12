@@ -17,6 +17,7 @@ public interface GudangBarangRepository extends JpaRepository<GudangBarang, Long
 
     List<GudangBarang> findByBarang(Barang barang);
     List<GudangBarang> findByGudang(Gudang barang);
+    GudangBarang findByGudangAndBarang(Gudang gudang, Barang barang);
 
     
 }

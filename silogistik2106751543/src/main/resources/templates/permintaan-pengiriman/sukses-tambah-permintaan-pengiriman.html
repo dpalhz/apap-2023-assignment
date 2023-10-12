@@ -4,20 +4,20 @@
 <head>
   <meta charset="UTF-8" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
-  <title>Error</title>
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  <title>Berhasil</title>
 </head>
 
 <body>
   <div class="container">
     <div class="card m-4 p-4">
       <div class="card-body">
-        <div th:each="error: ${errors}" class="text-center">
-          <h2 th:text="${error}"></h2>
+        <div class="text-center">
+          <h2> Permintaan Berhasil dibuat</h2>
         </div>
         <div class="text-center m-3">
           <a type="button" class="btn btn-md btn-primary" href="/">Beranda</a>
-         
+          <a type="button" class="btn btn-md btn-secondary" href="/permintaan-pengiriman">Deftar Permintaan Pengiriman</a>
         </div>
       </div>
     </div>

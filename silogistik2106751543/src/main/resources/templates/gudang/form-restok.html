@@ -58,15 +58,15 @@
                     <td th:text="${iterationStatus.count}"></td>
 
                     <td>
-                    <select class="form-control" th:field="*{listGudangBarang[__${iterationStatus.index}__].barang}">
-                      <div th:each="gudangBarangExisting : ${listGudangBarangExisting}">
-                        <option th:value="${gudangBarangExisting.barang}" th:text="${gudangBarangExisting.barang.merk}"></option>                      
+                    <select class="form-control" th:field="*{listGudangBarang[__${iterationStatus.index}__].barang.sku}">
+                      <div th:each="barangExisting : ${listBarang}">
+                        <option th:value="${barangExisting.sku}" th:text="${barangExisting.merk}"></option>                      
                       </div>
                     </select>
                   </td>  
                 
                     <td>
-                        <input type="number" class="form-control" th:field="*{listGudangBarang[__${iterationStatus.index}__].stok}">
+                        <input required type="number" class="form-control" th:field="*{listGudangBarang[__${iterationStatus.index}__].stok}">
 
                     </td>
                 </tr>

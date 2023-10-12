@@ -16,6 +16,8 @@ public interface GudangBarangService {
 
     GudangBarang save(GudangBarang gudangBarang);
 
+    GudangBarang getGudangBarangByGudangAndBarang(Gudang gudang, Barang barang);
+
     
 
 

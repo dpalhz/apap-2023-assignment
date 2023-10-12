@@ -4,6 +4,10 @@ package apap.ti.silogistik2106751543.model;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
@@ -17,6 +21,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @Entity
 @Table(name = "permintaan_pengiriman")
+@SQLDelete(sql = "UPDATE permintaan_pengiriman SET is_cancelled = true WHERE id=?")
+@Where(clause = "is_cancelled=false")
 public class PermintaanPengiriman {
 
     @Id
@@ -30,7 +36,7 @@ public class PermintaanPengiriman {
 
     @NotNull
     @Column(name = "is_cancelled", nullable = false)
-    private Boolean isCancelled;
+    private Boolean isCancelled = Boolean.FALSE;
 
     @NotNull
     @Column(name = "nama_penerima", nullable = false)
@@ -58,6 +64,12 @@ public class PermintaanPengiriman {
     @Temporal(TemporalType.TIMESTAMP)
     private Date waktuPermintaan;
 
+
+    @PrePersist
+    protected void onCreate() {
+        waktuPermintaan = new Date(); // Ini akan mengisi waktu saat entitas dibuat.
+    }
+
     @NotNull
     @ManyToOne
     @JoinColumn(name = "id_karyawan", referencedColumnName = "id", nullable = false)
@@ -65,7 +77,7 @@ public class PermintaanPengiriman {
 
 
     //  Relasi dengan PermintaanPengirimanBarang jika diperlukan
-    @OneToMany(mappedBy = "permintaanPengiriman", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "permintaanPengiriman", cascade = CascadeType.ALL,  fetch = FetchType.EAGER )
     private List<PermintaanPengirimanBarang> daftarPermintaanBarang;
  
     

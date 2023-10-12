@@ -12,7 +12,7 @@ import apap.ti.silogistik2106751543.dto.GudangBarangMapper;
 import apap.ti.silogistik2106751543.dto.request.CreateGudangBarangRequestDTO;
 import apap.ti.silogistik2106751543.dto.resoonse.BarangDetailDTO;
 import apap.ti.silogistik2106751543.dto.resoonse.BarangWithTotalStokDTO;
-import apap.ti.silogistik2106751543.dto.resoonse.GudangWithStok;
+
 import apap.ti.silogistik2106751543.model.Barang;
 import apap.ti.silogistik2106751543.model.Gudang;
 import apap.ti.silogistik2106751543.model.GudangBarang;
@@ -30,13 +30,12 @@ public class BarangServiceImpl implements BarangService{
 
 
     @Autowired
-    GudangBarangService gudangBaranService;
+    GudangBarangService gudangBarangService;
 
     @Override
     public void savaBarang(Barang barang) {
         // TODO Auto-generated method stub
         barangDb.save(barang);
-        saveToGudangBarang(barang);
     }
 
     @Override
@@ -85,13 +84,7 @@ public class BarangServiceImpl implements BarangService{
         return nomorSKU;
     }
 
-    public void saveToGudangBarang(Barang barang){
-        var gudangBarangDTO = new CreateGudangBarangRequestDTO();
-        gudangBarangDTO.setBarang(barang);
-        gudangBarangDTO.setStok(0);
-        var gudangBarang = gudangBarangMapper.createRequestGudangBarangRequestDTOToGudangBarang(gudangBarangDTO);
-        gudangBaranService.save(gudangBarang);
-    }
+  
 
     @Override
     public List<BarangWithTotalStokDTO> getListBarangWithTotalStok() {
@@ -103,7 +96,7 @@ public class BarangServiceImpl implements BarangService{
         for (Barang barang : listBarang) {
             // Hitung total stok untuk setiap barang
             int totalStok = 0;
-            List<GudangBarang> gudangBarangList = gudangBaranService.getAllGudangBarang();
+            List<GudangBarang> gudangBarangList = gudangBarangService.getAllGudangBarang();
             for (GudangBarang gudangBarang : gudangBarangList) {
                 if(barang.equals(gudangBarang.getBarang())){
                     totalStok += gudangBarang.getStok();
@@ -140,25 +133,13 @@ public class BarangServiceImpl implements BarangService{
       
       
         int totalStok = 0;
-        List<GudangBarang> gudangBarangList = gudangBaranService.getAllGudangBarang();
+        List<GudangBarang> gudangBarangList = gudangBarangService.getGudangBarangByBarang(barang);
 
         for (GudangBarang gudangBarang : gudangBarangList) {
-            if(barang.equals(gudangBarang.getBarang())){
                 totalStok += gudangBarang.getStok();
-                if(gudangBarang.getGudang()!=null){
-                    GudangWithStok gudangWithStok = new GudangWithStok();
-                    gudangWithStok.setGudang(gudangBarang.getGudang());
-                    gudangWithStok.setStokSuatuBarang(gudangBarang.getStok());
-                    barangDetailDTO.getGudangWithStok().add(gudangWithStok);
-                }
-            }
-            
         }
         barangDetailDTO.setTotalStok(totalStok);
 
-      
-
-        
 
 
         return barangDetailDTO;

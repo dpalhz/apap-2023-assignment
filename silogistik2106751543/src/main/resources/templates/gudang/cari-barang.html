@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <object th:include="~{fragments/common :: js}" th:remove="tag"></object>
+  <object th:include="~{fragments/common :: css}" th:remove="tag"></object>
+  <title>Cari Barang</title>
+</head>
+<body>
+  <nav th:replace="~{fragments/navbar :: navbar('gudang')}"></nav>
+  <div class="container mt-4">
+    <div class="card">
+      <div class="card-header d-flex justify-content-center">
+        <h2 class="card-title">Cari Barang</h2>
+      </div>
+      <br>
+      <form action="/gudang/cari-barang" method="GET" class="d-flex justify-content-center m-4">
+        <select class="form-control w-50" name="sku">
+          <option value="">Pilih merk Barang</option>
+          <option th:each="barang : ${listBarang}" th:value="${barang.sku}" th:text="${barang.merk}"></option>
+        </select>
+        <button type="submit" class="btn btn-primary ml-4">Cari</button>
+      </form>
+      <table class="table text-center" th:if="${gudangBarang != null and gudangBarang.size() > 0}">
+        <thead class="bg-dark text-white">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nama Gudang</th>
+            <th scope="col">Alamat Gudang</th>
+            <th scope="col">Stok</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="gudangBarang, iterationStatus: ${gudangBarang}">
+            <td th:text="${iterationStatus.count}"></td>
+            <td>
+              <h5 class="card-title"><a th:href="@{/gudang/{id}(id=${gudangBarang.gudang.idGudang})}" th:text="${gudangBarang.gudang.namaGudang}"></a></h5>
+            </td>
+            <td>
+              <h6 th:text="${gudangBarang.gudang.alamatGudang}"></h6>
+            </td>
+            <td>
+              <h6 th:text="${gudangBarang.stok}"></h6>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="card-footer d-flex justify-content-center">
+        <a href="/barang" class="btn btn-secondary">Kembali</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

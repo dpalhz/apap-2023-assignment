@@ -41,6 +41,12 @@ public class GudangBarangServiceImpl implements GudangBarangService {
         return gudangBarangDb.save(gudangBarang);
     }
 
+    @Override
+    public GudangBarang getGudangBarangByGudangAndBarang(Gudang gudang, Barang barang) {
+        // TODO Auto-generated method stub
+        return gudangBarangDb.findByGudangAndBarang(gudang,barang);
+    }
+
 
 
 }

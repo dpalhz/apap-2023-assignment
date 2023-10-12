@@ -16,7 +16,7 @@
   <div class="container mt-4">
     <div class="card">
       <div class="card-header d-flex justify-content-between">
-        <h2 class="card-title">Detail Gudang</h2>
+        <h2 class="card-title">Detail Barang</h2>
         
         <a th:href="@{/barang/{id}/ubah(id=${barangDetailDTO.sku})}" class="btn btn-success">Edit Barang</a>
 
@@ -47,7 +47,7 @@
           
 
         <h4 class="mt-4 font-weight-bold">Daftar Gudang Tersedia</h4>
-        <table class="table" th:if="${barangDetailDTO.gudangWithStok != null and barangDetailDTO.gudangWithStok.size() > 0}">
+        <table class="table" th:if="${gudangBarang != null and gudangBarang.size() > 0}">
 
         <!-- <table class="table"> -->
             <thead class="thead-dark">
@@ -59,16 +59,16 @@
               </tr>
             </thead>
             <tbody>
-              <tr th:each="gudangWithStok, iterationStatus: ${bukuDetailDTO.gudangWithStok}">
+              <tr th:each="gudangBarang, iterationStatus: ${gudangBarang}">
                   <td th:text="${iterationStatus.count}"></td>
                   <td>
-                      <h5 th:text="${gudangWithStok.gudang.namaGudang}" class="card-title"></h5>
+                      <h6 class="card-title"><a th:href="@{/gudang/{id}(id=${gudangBarang.gudang.idGudang})}" th:text="${gudangBarang.gudang.namaGudang}" style="text-decoration: none;"></a></h6>
                   </td>
                   <td>
-                      <h6 th:text="${gudangWithStok.gudang.alamatGudang}"></h6>
+                      <h6 th:text="${gudangBarang.gudang.alamatGudang}"></h6>
                   </td>
                   <td>
-                    <h6 th:text="${gudangWithStok.stokSuatuBarang}"></h6>
+                    <h6 th:text="${gudangBarang.stok}"></h6>
                 </td>
                  
               </tr>
@@ -76,7 +76,7 @@
           </table>
 
 
-          <p th:unless="${barangDetailDTO.gudangWithStok != null and barangDetailDTO.gudangWithStok.size() > 0}">Barang tidak tersedia di gudang manapun</p>
+          <p th:unless="${gudangBarang != null and gudangBarang.size() > 0}">Barang tidak tersedia di gudang manapun</p>
 
           
 

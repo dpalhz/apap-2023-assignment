@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <object th:include="~{fragments/common :: js}" th:remove="tag"></object>
+  <object th:include="~{fragments/common :: css}" th:remove="tag"></object>
+  
+
+  <title>Detail Permintaan Pengiriman</title>
+
+ 
+</head>
+<body>
+    <nav th:replace="~{fragments/navbar :: navbar('permintaan-pengiriman')}"></nav>
+
+
+    
+    <div class="card text-center m-4">
+        <div class="card-header">
+          <h2>
+            Cancel Permintaan
+
+          </h2>
+        </div>
+        <div class="card-body">
+          <!-- <h5 class="card-title" th:text="${kode}"></h5> -->
+          
+
+          <div class="container-fluid">
+            <div class="d-flex justify-content-center align-items-center mt-5" style="min-height: 5vh;">
+                <img src="https://icons8.com/icon/CIdgkSn4RFPP/checkmark" alt="Sukses" class="img-fluid" style="width: 5%; height: 5%;">
+            </div>
+
+            <p class="card-text">Permintaan Pengiriman berhasil dihapus</p>
+        </div>
+          <a href="/" class="btn btn-primary m-4">Kembali ke beranda</a>
+        </div>
+        <div class="card-footer text-muted">
+          Silogistik
+        </div>
+      </div>
+
+
+
+</body>
+</html>
