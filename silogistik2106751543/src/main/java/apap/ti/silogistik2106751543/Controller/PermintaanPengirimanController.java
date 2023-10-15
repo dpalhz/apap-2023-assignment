@@ -1,4 +1,4 @@
-package apap.ti.silogistik2106751543.controller;
+package apap.ti.silogistik2106751543.Controller;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -171,8 +171,8 @@ public class PermintaanPengirimanController {
         List<Barang> listBarang = barangService.getAllBarang();
 
         model.addAttribute("listBarang", listBarang);
-        var permintaan = new CreatePermintaanPengirimanBarangDTO();
-        model.addAttribute("permintaanPengirimanDTO", permintaan);
+        // var permintaan = new CreatePermintaanPengirimanBarangDTO();
+        model.addAttribute("permintaanPengirimanDTO", null);
    
         return "permintaan-pengiriman/filter-permintaan-pengiriman.html"; // Gantilah dengan nama template Thymeleaf yang sesuai
     }

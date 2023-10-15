@@ -69,7 +69,8 @@
                     <td th:text="${iterationStatus.count}"></td>
                     <td th:text="${req.waktuPermintaan}"></td>
                     <td>
-                        <a th:href="@{'/detail-permintaan/' + ${req.idPermintaanPengiriman}}" style="text-decoration: none;">
+                      
+                        <a th:href="@{/permintaan-pengiriman/{id}(id=${req.idPermintaanPengiriman})}" style="text-decoration: none;">
                             <span th:text="${req.nomorPengiriman}"></span>
                         </a>
                     </td>

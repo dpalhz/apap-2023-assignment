@@ -1,4 +1,4 @@
-package apap.ti.silogistik2106751543.controller;
+package apap.ti.silogistik2106751543.Controller;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;

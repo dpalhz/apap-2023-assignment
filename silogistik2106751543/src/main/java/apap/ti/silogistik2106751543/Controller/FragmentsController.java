@@ -1,4 +1,4 @@
-package apap.ti.silogistik2106751543.controller;
+package apap.ti.silogistik2106751543.Controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
