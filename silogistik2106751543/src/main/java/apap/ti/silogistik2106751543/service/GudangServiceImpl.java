@@ -97,5 +97,26 @@ public class GudangServiceImpl implements GudangService{
         gudangBarangService.save(gudangBarang);
     }
 
+    @Override
+    public Integer totalStok(Gudang gudang) {
+        // TODO Auto-generated method stub
+        int result =0;
+        List<GudangBarang> listGudangBarang = gudangBarangService.getGudangBarangByGudang(gudang);
+        if (listGudangBarang!=null) {
+            for (GudangBarang gudangBarang : listGudangBarang) {
+            result += gudangBarang.getStok();
+        }
+            
+        }
+        
+        return result;
+    }
+
+    @Override
+    public List<Gudang> findAllGudangSortedByTotalStok() {
+        // TODO Auto-generated method stub
+        return gudangDb.findAllGudangSortedByTotalStok();
+    }
+
     
 }

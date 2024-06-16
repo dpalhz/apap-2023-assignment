@@ -79,6 +79,5 @@ public class PermintaanPengiriman {
     //  Relasi dengan PermintaanPengirimanBarang jika diperlukan
     @OneToMany(mappedBy = "permintaanPengiriman", cascade = CascadeType.ALL,  fetch = FetchType.EAGER )
     private List<PermintaanPengirimanBarang> daftarPermintaanBarang;
- 
     
 }

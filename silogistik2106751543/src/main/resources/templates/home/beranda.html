@@ -57,6 +57,17 @@
                     </div>
                 </div>
             </div>
+
+            <div class="col-md-3 mb-4">
+                <div class="card text-white text-center" style="background-color: rgba(0, 0, 255, 0.4); min-width: 15vw; min-height: 25vh;">
+                    <div class="card-body d-flex flex-column justify-content-center" >
+                        <h6 class="card-title">Gudang paling banyak stok</h6>
+                        <p class="card-text" th:text="${gudangName}"></p>
+                        <h3 th:text="${totalStok}"></h3>
+                        <p class="card-text">Total Stok</p>
+                    </div>
+                </div>
+            </div>
         </div>
       </div>
 

@@ -19,6 +19,9 @@ public interface GudangService {
     List<GudangBarang> getGudangBarang(Long id);
 
     void restokBarang(Gudang gudangFromDTO);
+    Integer totalStok (Gudang gudang);
+    List<Gudang> findAllGudangSortedByTotalStok();
+    
 
     
     
